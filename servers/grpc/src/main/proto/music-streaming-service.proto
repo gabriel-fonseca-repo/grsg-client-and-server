@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.fyg.grpc.proto";
+option java_outer_classname = "MusicStreamingProto";
+
+message EmptyRequest {}
+
+message User {
+  int32 id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message Song {
+  int32 id = 1;
+  string name = 2;
+  string artist = 3;
+}
+
+message Playlist {
+  int32 id = 1;
+  string name = 2;
+  int32 userId = 3;
+  repeated int32 songs = 4;
+}
+
+service MusicStreamingService {
+  rpc ListAllUsers (EmptyRequest) returns (ListAllUsersReply) {
+  }
+
+  rpc ListAllSongs (EmptyRequest) returns (ListAllSongsReply) {
+  }
+
+  rpc ListAllPlaylistsByUser (ListAllPlaylistsByUserRequest) returns (ListAllPlaylistsByUserReply) {
+  }
+
+  rpc ListAllSongDataOfPlaylist (ListAllSongDataOfPlaylistRequest) returns (ListAllSongDataOfPlaylistReply) {
+  }
+
+  rpc ListAllPlaylistsWithSong (ListAllPlaylistsWithSongRequest) returns (ListAllPlaylistsWithSongReply) {
+  }
+}
+
+message ListAllUsersReply {
+  repeated User usuarios = 1;
+}
+
+message ListAllSongsReply {
+  repeated Song songs = 1;
+}
+
+message ListAllPlaylistsByUserRequest {
+  int32 userId = 1;
+}
+
+message ListAllPlaylistsByUserReply {
+  repeated Playlist playlists = 1;
+}
+
+message ListAllSongDataOfPlaylistRequest {
+  int32 playlistId = 1;
+}
+
+message ListAllSongDataOfPlaylistReply {
+  repeated Song songsFromPlaylist = 1;
+}
+
+message ListAllPlaylistsWithSongRequest {
+  int32 songId = 1;
+}
+
+message ListAllPlaylistsWithSongReply {
+  repeated Playlist playlistData = 1;
+}
