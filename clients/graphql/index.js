@@ -35,32 +35,27 @@ async function makeRequest(query, variables = {}) {
   }
 }
 
-makeRequest(
-  `
+makeRequest(`
   query ListAllUsers {
     listAllUsers {
         age
         id
         name
-    } 
-  }
-`
+    }
+  }`
 );
 
-makeRequest(
-  `
+makeRequest(`
   query ListAllSongs {
     listAllSongs {
         artist
         id
         name
     }
-  }
-`
+  }`
 );
 
-makeRequest(
-  `
+makeRequest(`
   query ListAllPlaylistsByUser($userId: Int) {
     listAllPlaylistsByUser(userId: $userId) {
         id
@@ -68,26 +63,22 @@ makeRequest(
         songs
         userId
     }
-  }
-`,
+  }`,
   { userId: 10 }
 );
 
-makeRequest(
-  `
+makeRequest(`
   query ListAllSongDataOfPlaylist($playlistId: Int) {
     listAllSongDataOfPlaylist(playlistId: $playlistId) {
         artist
         id
         name
     }
-  }
-`,
+  }`,
   { playlistId: 8 }
 );
 
-makeRequest(
-  `
+makeRequest(`
   query ListAllPlaylistsWithSong($songId: Int) {
     listAllPlaylistsWithSong(songId: $songId) {
         id
@@ -95,7 +86,6 @@ makeRequest(
         songs
         userId
     }
-  }
-`,
+  }`,
   { songId: 6 }
 );

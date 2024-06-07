@@ -27,8 +27,12 @@ async function makeRequest(endpoint) {
   }
 }
 
+const userId = 10;
+const playlistId = 8;
+const songId = 6;
+
 makeRequest("/users");
 makeRequest("/songs");
-makeRequest("/playlists-by-user/10");
-makeRequest("/songs-by-playlist/8");
-makeRequest("/playlists-with-song/6");
+makeRequest(`/playlists-by-user/${userId}`);
+makeRequest(`/songs-by-playlist/${playlistId}`);
+makeRequest(`/playlists-by-song/${songId}`);
