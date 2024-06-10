@@ -14,5 +14,9 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.4.1"
+  },
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "performance-now": "^2.1.0"
   }
 }

@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MSSController {
@@ -83,8 +84,9 @@ public class MSSController {
     return ResponseEntity.ok(playlistUpdated);
   }
 
-  @DeleteMapping("/users/{id}")
-  public ResponseEntity<Integer> deleteUser(@PathVariable Integer id) {
+  @DeleteMapping("/users")
+  public ResponseEntity<Integer> deleteUser(@RequestBody(required = false) Map<String, Integer> body) {
+    Integer id = body.get("id");
     Integer deletedUser = database.deleteUser(id);
     if (deletedUser == -1) {
       return ResponseEntity.badRequest().build();
@@ -92,8 +94,9 @@ public class MSSController {
     return ResponseEntity.ok(deletedUser);
   }
 
-  @DeleteMapping("/songs/{id}")
-  public ResponseEntity<Integer> deleteSong(@PathVariable Integer id) {
+  @DeleteMapping("/songs")
+  public ResponseEntity<Integer> deleteSong(@RequestBody(required = false) Map<String, Integer> body) {
+    Integer id = body.get("id");
     Integer deletedSong = database.deleteSong(id);
     if (deletedSong == -1) {
       return ResponseEntity.badRequest().build();
@@ -101,8 +104,9 @@ public class MSSController {
     return ResponseEntity.ok(deletedSong);
   }
 
-  @DeleteMapping("/playlists/{id}")
-  public ResponseEntity<Integer> deletePlaylist(@PathVariable Integer id) {
+  @DeleteMapping("/playlists")
+  public ResponseEntity<Integer> deletePlaylist(@RequestBody(required = false) Map<String, Integer> body) {
+    Integer id = body.get("id");
     Integer deletedPlaylist = database.deletePlaylist(id);
     if (deletedPlaylist == -1) {
       return ResponseEntity.badRequest().build();
