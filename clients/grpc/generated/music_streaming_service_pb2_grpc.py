@@ -5,31 +5,28 @@ import warnings
 
 from generated import music_streaming_service_pb2 as music__streaming__service__pb2
 
-GRPC_GENERATED_VERSION = "1.64.1"
+GRPC_GENERATED_VERSION = '1.64.1'
 GRPC_VERSION = grpc.__version__
-EXPECTED_ERROR_RELEASE = "1.65.0"
-SCHEDULED_RELEASE_DATE = "June 25, 2024"
+EXPECTED_ERROR_RELEASE = '1.65.0'
+SCHEDULED_RELEASE_DATE = 'June 25, 2024'
 _version_not_supported = False
 
 try:
     from grpc._utilities import first_version_is_lower
-
-    _version_not_supported = first_version_is_lower(
-        GRPC_VERSION, GRPC_GENERATED_VERSION
-    )
+    _version_not_supported = first_version_is_lower(GRPC_VERSION, GRPC_GENERATED_VERSION)
 except ImportError:
     _version_not_supported = True
 
 if _version_not_supported:
     warnings.warn(
-        f"The grpc package installed is at version {GRPC_VERSION},"
-        + f" but the generated code in music_streaming_service_pb2_grpc.py depends on"
-        + f" grpcio>={GRPC_GENERATED_VERSION}."
-        + f" Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}"
-        + f" or downgrade your generated code using grpcio-tools<={GRPC_VERSION}."
-        + f" This warning will become an error in {EXPECTED_ERROR_RELEASE},"
-        + f" scheduled for release on {SCHEDULED_RELEASE_DATE}.",
-        RuntimeWarning,
+        f'The grpc package installed is at version {GRPC_VERSION},'
+        + f' but the generated code in music_streaming_service_pb2_grpc.py depends on'
+        + f' grpcio>={GRPC_GENERATED_VERSION}.'
+        + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
+        + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
+        + f' This warning will become an error in {EXPECTED_ERROR_RELEASE},'
+        + f' scheduled for release on {SCHEDULED_RELEASE_DATE}.',
+        RuntimeWarning
     )
 
 
@@ -42,130 +39,234 @@ class MusicStreamingServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ListAllUsers = channel.unary_unary(
-            "/MusicStreamingService/ListAllUsers",
-            request_serializer=music__streaming__service__pb2.EmptyRequest.SerializeToString,
-            response_deserializer=music__streaming__service__pb2.ListAllUsersReply.FromString,
-            _registered_method=True,
-        )
-        self.ListAllSongs = channel.unary_unary(
-            "/MusicStreamingService/ListAllSongs",
-            request_serializer=music__streaming__service__pb2.EmptyRequest.SerializeToString,
-            response_deserializer=music__streaming__service__pb2.ListAllSongsReply.FromString,
-            _registered_method=True,
-        )
-        self.ListAllPlaylistsByUser = channel.unary_unary(
-            "/MusicStreamingService/ListAllPlaylistsByUser",
-            request_serializer=music__streaming__service__pb2.ListAllPlaylistsByUserRequest.SerializeToString,
-            response_deserializer=music__streaming__service__pb2.ListAllPlaylistsByUserReply.FromString,
-            _registered_method=True,
-        )
-        self.ListAllSongDataOfPlaylist = channel.unary_unary(
-            "/MusicStreamingService/ListAllSongDataOfPlaylist",
-            request_serializer=music__streaming__service__pb2.ListAllSongDataOfPlaylistRequest.SerializeToString,
-            response_deserializer=music__streaming__service__pb2.ListAllSongDataOfPlaylistReply.FromString,
-            _registered_method=True,
-        )
-        self.ListAllPlaylistsWithSong = channel.unary_unary(
-            "/MusicStreamingService/ListAllPlaylistsWithSong",
-            request_serializer=music__streaming__service__pb2.ListAllPlaylistsWithSongRequest.SerializeToString,
-            response_deserializer=music__streaming__service__pb2.ListAllPlaylistsWithSongReply.FromString,
-            _registered_method=True,
-        )
+        self.GetUsers = channel.unary_unary(
+                '/MusicStreamingService/GetUsers',
+                request_serializer=music__streaming__service__pb2.EmptyRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.GetUsersReply.FromString,
+                _registered_method=True)
+        self.GetSongs = channel.unary_unary(
+                '/MusicStreamingService/GetSongs',
+                request_serializer=music__streaming__service__pb2.EmptyRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.GetSongsReply.FromString,
+                _registered_method=True)
+        self.GetPlaylists = channel.unary_unary(
+                '/MusicStreamingService/GetPlaylists',
+                request_serializer=music__streaming__service__pb2.EmptyRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.GetPlaylistsReply.FromString,
+                _registered_method=True)
+        self.CreateUser = channel.unary_unary(
+                '/MusicStreamingService/CreateUser',
+                request_serializer=music__streaming__service__pb2.CreateUserRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.User.FromString,
+                _registered_method=True)
+        self.CreateSong = channel.unary_unary(
+                '/MusicStreamingService/CreateSong',
+                request_serializer=music__streaming__service__pb2.CreateSongRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.Song.FromString,
+                _registered_method=True)
+        self.CreatePlaylist = channel.unary_unary(
+                '/MusicStreamingService/CreatePlaylist',
+                request_serializer=music__streaming__service__pb2.CreatePlaylistRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.Playlist.FromString,
+                _registered_method=True)
+        self.UpdateUser = channel.unary_unary(
+                '/MusicStreamingService/UpdateUser',
+                request_serializer=music__streaming__service__pb2.UpdateUserRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.User.FromString,
+                _registered_method=True)
+        self.UpdateSong = channel.unary_unary(
+                '/MusicStreamingService/UpdateSong',
+                request_serializer=music__streaming__service__pb2.UpdateSongRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.Song.FromString,
+                _registered_method=True)
+        self.UpdatePlaylist = channel.unary_unary(
+                '/MusicStreamingService/UpdatePlaylist',
+                request_serializer=music__streaming__service__pb2.UpdatePlaylistRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.Playlist.FromString,
+                _registered_method=True)
+        self.DeleteUser = channel.unary_unary(
+                '/MusicStreamingService/DeleteUser',
+                request_serializer=music__streaming__service__pb2.IdRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.User.FromString,
+                _registered_method=True)
+        self.DeleteSong = channel.unary_unary(
+                '/MusicStreamingService/DeleteSong',
+                request_serializer=music__streaming__service__pb2.IdRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.Song.FromString,
+                _registered_method=True)
+        self.DeletePlaylist = channel.unary_unary(
+                '/MusicStreamingService/DeletePlaylist',
+                request_serializer=music__streaming__service__pb2.IdRequest.SerializeToString,
+                response_deserializer=music__streaming__service__pb2.Playlist.FromString,
+                _registered_method=True)
 
 
 class MusicStreamingServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def ListAllUsers(self, request, context):
+    def GetUsers(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-    def ListAllSongs(self, request, context):
+    def GetSongs(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-    def ListAllPlaylistsByUser(self, request, context):
+    def GetPlaylists(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-    def ListAllSongDataOfPlaylist(self, request, context):
+    def CreateUser(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-    def ListAllPlaylistsWithSong(self, request, context):
+    def CreateSong(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreatePlaylist(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateUser(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateSong(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdatePlaylist(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteUser(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteSong(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeletePlaylist(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_MusicStreamingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-        "ListAllUsers": grpc.unary_unary_rpc_method_handler(
-            servicer.ListAllUsers,
-            request_deserializer=music__streaming__service__pb2.EmptyRequest.FromString,
-            response_serializer=music__streaming__service__pb2.ListAllUsersReply.SerializeToString,
-        ),
-        "ListAllSongs": grpc.unary_unary_rpc_method_handler(
-            servicer.ListAllSongs,
-            request_deserializer=music__streaming__service__pb2.EmptyRequest.FromString,
-            response_serializer=music__streaming__service__pb2.ListAllSongsReply.SerializeToString,
-        ),
-        "ListAllPlaylistsByUser": grpc.unary_unary_rpc_method_handler(
-            servicer.ListAllPlaylistsByUser,
-            request_deserializer=music__streaming__service__pb2.ListAllPlaylistsByUserRequest.FromString,
-            response_serializer=music__streaming__service__pb2.ListAllPlaylistsByUserReply.SerializeToString,
-        ),
-        "ListAllSongDataOfPlaylist": grpc.unary_unary_rpc_method_handler(
-            servicer.ListAllSongDataOfPlaylist,
-            request_deserializer=music__streaming__service__pb2.ListAllSongDataOfPlaylistRequest.FromString,
-            response_serializer=music__streaming__service__pb2.ListAllSongDataOfPlaylistReply.SerializeToString,
-        ),
-        "ListAllPlaylistsWithSong": grpc.unary_unary_rpc_method_handler(
-            servicer.ListAllPlaylistsWithSong,
-            request_deserializer=music__streaming__service__pb2.ListAllPlaylistsWithSongRequest.FromString,
-            response_serializer=music__streaming__service__pb2.ListAllPlaylistsWithSongReply.SerializeToString,
-        ),
+            'GetUsers': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUsers,
+                    request_deserializer=music__streaming__service__pb2.EmptyRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.GetUsersReply.SerializeToString,
+            ),
+            'GetSongs': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSongs,
+                    request_deserializer=music__streaming__service__pb2.EmptyRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.GetSongsReply.SerializeToString,
+            ),
+            'GetPlaylists': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPlaylists,
+                    request_deserializer=music__streaming__service__pb2.EmptyRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.GetPlaylistsReply.SerializeToString,
+            ),
+            'CreateUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateUser,
+                    request_deserializer=music__streaming__service__pb2.CreateUserRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.User.SerializeToString,
+            ),
+            'CreateSong': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateSong,
+                    request_deserializer=music__streaming__service__pb2.CreateSongRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.Song.SerializeToString,
+            ),
+            'CreatePlaylist': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreatePlaylist,
+                    request_deserializer=music__streaming__service__pb2.CreatePlaylistRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.Playlist.SerializeToString,
+            ),
+            'UpdateUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateUser,
+                    request_deserializer=music__streaming__service__pb2.UpdateUserRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.User.SerializeToString,
+            ),
+            'UpdateSong': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateSong,
+                    request_deserializer=music__streaming__service__pb2.UpdateSongRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.Song.SerializeToString,
+            ),
+            'UpdatePlaylist': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdatePlaylist,
+                    request_deserializer=music__streaming__service__pb2.UpdatePlaylistRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.Playlist.SerializeToString,
+            ),
+            'DeleteUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteUser,
+                    request_deserializer=music__streaming__service__pb2.IdRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.User.SerializeToString,
+            ),
+            'DeleteSong': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteSong,
+                    request_deserializer=music__streaming__service__pb2.IdRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.Song.SerializeToString,
+            ),
+            'DeletePlaylist': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeletePlaylist,
+                    request_deserializer=music__streaming__service__pb2.IdRequest.FromString,
+                    response_serializer=music__streaming__service__pb2.Playlist.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-        "MusicStreamingService", rpc_method_handlers
-    )
+            'MusicStreamingService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers("MusicStreamingService", rpc_method_handlers)
+    server.add_registered_method_handlers('MusicStreamingService', rpc_method_handlers)
 
 
-# This class is part of an EXPERIMENTAL API.
+ # This class is part of an EXPERIMENTAL API.
 class MusicStreamingService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def ListAllUsers(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        insecure=False,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
+    def GetUsers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
-            "/MusicStreamingService/ListAllUsers",
+            '/MusicStreamingService/GetUsers',
             music__streaming__service__pb2.EmptyRequest.SerializeToString,
-            music__streaming__service__pb2.ListAllUsersReply.FromString,
+            music__streaming__service__pb2.GetUsersReply.FromString,
             options,
             channel_credentials,
             insecure,
@@ -174,28 +275,25 @@ class MusicStreamingService(object):
             wait_for_ready,
             timeout,
             metadata,
-            _registered_method=True,
-        )
+            _registered_method=True)
 
     @staticmethod
-    def ListAllSongs(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        insecure=False,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
+    def GetSongs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
-            "/MusicStreamingService/ListAllSongs",
+            '/MusicStreamingService/GetSongs',
             music__streaming__service__pb2.EmptyRequest.SerializeToString,
-            music__streaming__service__pb2.ListAllSongsReply.FromString,
+            music__streaming__service__pb2.GetSongsReply.FromString,
             options,
             channel_credentials,
             insecure,
@@ -204,28 +302,25 @@ class MusicStreamingService(object):
             wait_for_ready,
             timeout,
             metadata,
-            _registered_method=True,
-        )
+            _registered_method=True)
 
     @staticmethod
-    def ListAllPlaylistsByUser(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        insecure=False,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
+    def GetPlaylists(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
-            "/MusicStreamingService/ListAllPlaylistsByUser",
-            music__streaming__service__pb2.ListAllPlaylistsByUserRequest.SerializeToString,
-            music__streaming__service__pb2.ListAllPlaylistsByUserReply.FromString,
+            '/MusicStreamingService/GetPlaylists',
+            music__streaming__service__pb2.EmptyRequest.SerializeToString,
+            music__streaming__service__pb2.GetPlaylistsReply.FromString,
             options,
             channel_credentials,
             insecure,
@@ -234,28 +329,25 @@ class MusicStreamingService(object):
             wait_for_ready,
             timeout,
             metadata,
-            _registered_method=True,
-        )
+            _registered_method=True)
 
     @staticmethod
-    def ListAllSongDataOfPlaylist(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        insecure=False,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
+    def CreateUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
-            "/MusicStreamingService/ListAllSongDataOfPlaylist",
-            music__streaming__service__pb2.ListAllSongDataOfPlaylistRequest.SerializeToString,
-            music__streaming__service__pb2.ListAllSongDataOfPlaylistReply.FromString,
+            '/MusicStreamingService/CreateUser',
+            music__streaming__service__pb2.CreateUserRequest.SerializeToString,
+            music__streaming__service__pb2.User.FromString,
             options,
             channel_credentials,
             insecure,
@@ -264,28 +356,25 @@ class MusicStreamingService(object):
             wait_for_ready,
             timeout,
             metadata,
-            _registered_method=True,
-        )
+            _registered_method=True)
 
     @staticmethod
-    def ListAllPlaylistsWithSong(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        insecure=False,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
+    def CreateSong(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
-            "/MusicStreamingService/ListAllPlaylistsWithSong",
-            music__streaming__service__pb2.ListAllPlaylistsWithSongRequest.SerializeToString,
-            music__streaming__service__pb2.ListAllPlaylistsWithSongReply.FromString,
+            '/MusicStreamingService/CreateSong',
+            music__streaming__service__pb2.CreateSongRequest.SerializeToString,
+            music__streaming__service__pb2.Song.FromString,
             options,
             channel_credentials,
             insecure,
@@ -294,5 +383,193 @@ class MusicStreamingService(object):
             wait_for_ready,
             timeout,
             metadata,
-            _registered_method=True,
-        )
+            _registered_method=True)
+
+    @staticmethod
+    def CreatePlaylist(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/MusicStreamingService/CreatePlaylist',
+            music__streaming__service__pb2.CreatePlaylistRequest.SerializeToString,
+            music__streaming__service__pb2.Playlist.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/MusicStreamingService/UpdateUser',
+            music__streaming__service__pb2.UpdateUserRequest.SerializeToString,
+            music__streaming__service__pb2.User.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateSong(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/MusicStreamingService/UpdateSong',
+            music__streaming__service__pb2.UpdateSongRequest.SerializeToString,
+            music__streaming__service__pb2.Song.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdatePlaylist(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/MusicStreamingService/UpdatePlaylist',
+            music__streaming__service__pb2.UpdatePlaylistRequest.SerializeToString,
+            music__streaming__service__pb2.Playlist.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/MusicStreamingService/DeleteUser',
+            music__streaming__service__pb2.IdRequest.SerializeToString,
+            music__streaming__service__pb2.User.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteSong(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/MusicStreamingService/DeleteSong',
+            music__streaming__service__pb2.IdRequest.SerializeToString,
+            music__streaming__service__pb2.Song.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeletePlaylist(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/MusicStreamingService/DeletePlaylist',
+            music__streaming__service__pb2.IdRequest.SerializeToString,
+            music__streaming__service__pb2.Playlist.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)

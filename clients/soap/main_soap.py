@@ -1,7 +1,7 @@
 import requests
 
 
-class SoapUser():
+class MusicStreamingSOAPClient:
     url = "http://localhost:8081/soap/music"
 
     main_headers = {
@@ -13,9 +13,10 @@ class SoapUser():
         "User-Agent": "python-requests/2.26.0",
     }
 
-    
     def list_all_users(self):
-        return requests.request("POST", self.url,         
+        return requests.request(
+            "POST",
+            self.url,
             headers=self.main_headers,
             data="""
                 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:msc="http://musicstreaming.com">
@@ -26,9 +27,10 @@ class SoapUser():
             """.strip(),
         ).text
 
-    
     def list_all_songs(self):
-        return requests.request("POST", self.url,  
+        return requests.request(
+            "POST",
+            self.url,
             headers=self.main_headers,
             data="""
               <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:msc="http://musicstreaming.com">
@@ -39,9 +41,10 @@ class SoapUser():
             """.strip(),
         ).text
 
-    
     def list_all_playlists_by_user(self, user_id: int):
-        return requests.request("POST", self.url,  
+        return requests.request(
+            "POST",
+            self.url,
             headers=self.main_headers,
             data=f"""
               <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:msc="http://musicstreaming.com">
@@ -54,9 +57,10 @@ class SoapUser():
             """.strip(),
         ).text
 
-    
     def list_all_song_data_of_playlist(self, playlist_id: int):
-        return requests.request("POST", self.url,  
+        return requests.request(
+            "POST",
+            self.url,
             headers=self.main_headers,
             data=f"""
               <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:msc="http://musicstreaming.com">
@@ -69,9 +73,10 @@ class SoapUser():
             """.strip(),
         ).text
 
-    
     def list_all_playlists_with_song(self, song_id: int):
-        return requests.request("POST", self.url,  
+        return requests.request(
+            "POST",
+            self.url,
             headers=self.main_headers,
             data=f"""
               <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:msc="http://musicstreaming.com">
@@ -83,6 +88,7 @@ class SoapUser():
               </soapenv:Envelope>
             """.strip(),
         ).text
+
 
 if __name__ == "__main__":
     import random as r
@@ -96,7 +102,7 @@ if __name__ == "__main__":
     def random_song_id():
         return r.randint(0, 99)
 
-    client = SoapUser()
+    client = MusicStreamingSOAPClient()
     print(client.list_all_users())
     print(client.list_all_songs())
     print(client.list_all_playlists_by_user(random_user_id()))

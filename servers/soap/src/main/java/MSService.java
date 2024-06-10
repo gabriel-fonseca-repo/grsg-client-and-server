@@ -7,18 +7,39 @@ import java.util.List;
 public interface MSService {
 
   @WebMethod
-  List<FygUser> listAllUsers();
+  List<FygUser> getUsers();
 
   @WebMethod
-  List<FygSong> listAllSongs();
+  List<FygSong> getSongs();
 
   @WebMethod
-  List<FygPlaylist> listAllPlaylistsByUser(Integer userId);
+  List<FygPlaylist> getPlaylists();
 
   @WebMethod
-  List<FygSong> listAllSongDataOfPlaylist(Integer playlistId);
+  Integer createUser(FygUser user);
 
   @WebMethod
-  List<FygPlaylist> listAllPlaylistsWithSong(Integer songId);
+  Integer createSong(FygSong song);
+
+  @WebMethod
+  Integer createPlaylist(FygPlaylist playlist);
+
+  @WebMethod
+  Integer updateUser(FygUser user);
+
+  @WebMethod
+  Integer updateSong(FygSong song);
+
+  @WebMethod
+  Integer updatePlaylist(FygPlaylist playlist);
+
+  @WebMethod
+  Integer deleteUser(Integer id);
+
+  @WebMethod
+  Integer deleteSong(Integer id);
+
+  @WebMethod
+  Integer deletePlaylist(Integer id);
 
 }

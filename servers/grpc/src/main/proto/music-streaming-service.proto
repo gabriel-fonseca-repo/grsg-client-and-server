@@ -26,50 +26,78 @@ message Playlist {
 }
 
 service MusicStreamingService {
-  rpc ListAllUsers (EmptyRequest) returns (ListAllUsersReply) {
-  }
+  rpc GetUsers (EmptyRequest) returns (GetUsersReply) {}
 
-  rpc ListAllSongs (EmptyRequest) returns (ListAllSongsReply) {
-  }
+  rpc GetSongs (EmptyRequest) returns (GetSongsReply) {}
 
-  rpc ListAllPlaylistsByUser (ListAllPlaylistsByUserRequest) returns (ListAllPlaylistsByUserReply) {
-  }
+  rpc GetPlaylists (EmptyRequest) returns (GetPlaylistsReply) {}
 
-  rpc ListAllSongDataOfPlaylist (ListAllSongDataOfPlaylistRequest) returns (ListAllSongDataOfPlaylistReply) {
-  }
+  rpc CreateUser (CreateUserRequest) returns (User) {}
 
-  rpc ListAllPlaylistsWithSong (ListAllPlaylistsWithSongRequest) returns (ListAllPlaylistsWithSongReply) {
-  }
+  rpc CreateSong (CreateSongRequest) returns (Song) {}
+
+  rpc CreatePlaylist (CreatePlaylistRequest) returns (Playlist) {}
+
+  rpc UpdateUser (UpdateUserRequest) returns (User) {}
+
+  rpc UpdateSong (UpdateSongRequest) returns (Song) {}
+
+  rpc UpdatePlaylist (UpdatePlaylistRequest) returns (Playlist) {}
+
+  rpc DeleteUser (IdRequest) returns (User) {}
+
+  rpc DeleteSong (IdRequest) returns (Song) {}
+
+  rpc DeletePlaylist (IdRequest) returns (Playlist) {}
 }
 
-message ListAllUsersReply {
-  repeated User usuarios = 1;
+message IdRequest {
+  int32 id = 1;
 }
 
-message ListAllSongsReply {
+message GetUsersReply {
+  repeated User users = 1;
+}
+
+message GetSongsReply {
   repeated Song songs = 1;
 }
 
-message ListAllPlaylistsByUserRequest {
-  int32 userId = 1;
-}
-
-message ListAllPlaylistsByUserReply {
+message GetPlaylistsReply {
   repeated Playlist playlists = 1;
 }
 
-message ListAllSongDataOfPlaylistRequest {
-  int32 playlistId = 1;
+message CreateUserRequest {
+  string name = 1;
+  int32 age = 2;
 }
 
-message ListAllSongDataOfPlaylistReply {
-  repeated Song songsFromPlaylist = 1;
+message CreateSongRequest {
+  string name = 1;
+  string artist = 2;
 }
 
-message ListAllPlaylistsWithSongRequest {
-  int32 songId = 1;
+message CreatePlaylistRequest {
+  string name = 1;
+  int32 userId = 2;
+  repeated int32 songs = 3;
 }
 
-message ListAllPlaylistsWithSongReply {
-  repeated Playlist playlistData = 1;
+message UpdateUserRequest {
+  int32 id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message UpdateSongRequest {
+  int32 id = 1;
+  string name = 2;
+  string artist = 3;
+}
+
+message UpdatePlaylistRequest {
+  int32 id = 1;
+  string name = 2;
+  int32 userId = 3;
+  repeated int32 songs = 4;
 }

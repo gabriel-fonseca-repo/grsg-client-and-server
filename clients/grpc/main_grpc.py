@@ -2,55 +2,111 @@ import grpc
 import generated.music_streaming_service_pb2 as mss_pb2
 import generated.music_streaming_service_pb2_grpc as mss_pb2_grpc
 
+from typing import Dict, Union
 
-class MusicStreamingClient:
+
+class MusicStreamingGRPCClient:
 
     def __init__(self, host="localhost", port=9090):
         self.channel = grpc.insecure_channel(f"{host}:{port}")
         self.stub = mss_pb2_grpc.MusicStreamingServiceStub(self.channel)
 
-    def list_all_users(self):
+    def get_users(self):
         try:
-            response = self.stub.ListAllUsers(request=mss_pb2.EmptyRequest())
+            response = self.stub.GetUsers(request=mss_pb2.EmptyRequest())
             return response
         except grpc.RpcError as e:
             print(f"gRPC error: {e.code()}, {e.details()}")
             return None
 
-    def list_all_songs(self):
+    def get_songs(self):
         try:
-            response = self.stub.ListAllSongs(request=mss_pb2.EmptyRequest())
+            response = self.stub.GetSongs(request=mss_pb2.EmptyRequest())
             return response
         except grpc.RpcError as e:
             print(f"gRPC error: {e.code()}, {e.details()}")
             return None
 
-    def list_all_playlists_by_user(self, user_id):
+    def get_playlists(self):
         try:
-            response = self.stub.ListAllPlaylistsByUser(
-                request=mss_pb2.ListAllPlaylistsByUserRequest(userId=user_id),
+            response = self.stub.GetPlaylists(request=mss_pb2.EmptyRequest())
+            return response
+        except grpc.RpcError as e:
+            print(f"gRPC error: {e.code()}, {e.details()}")
+            return None
+
+    def create_user(self, user: Dict[str, Union[str, int]]):
+        try:
+            response = self.stub.CreateUser(request=mss_pb2.CreateUserRequest(**user))
+            return response
+        except grpc.RpcError as e:
+            print(f"gRPC error: {e.code()}, {e.details()}")
+            return None
+
+    def create_song(self, song: Dict[str, str]):
+        try:
+            response = self.stub.CreateSong(request=mss_pb2.CreateSongRequest(**song))
+            return response
+        except grpc.RpcError as e:
+            print(f"gRPC error: {e.code()}, {e.details()}")
+            return None
+
+    def create_playlist(self, playlist: Dict[str, Union[str, int, list]]):
+        try:
+            response = self.stub.CreatePlaylist(
+                request=mss_pb2.CreatePlaylistRequest(**playlist)
             )
             return response
         except grpc.RpcError as e:
             print(f"gRPC error: {e.code()}, {e.details()}")
             return None
 
-    def list_all_song_data_of_playlist(self, playlist_id):
+    def update_user(self, user: Dict[str, Union[str, int]]):
         try:
-            response = self.stub.ListAllSongDataOfPlaylist(
-                request=mss_pb2.ListAllSongDataOfPlaylistRequest(
-                    playlistId=playlist_id
-                ),
+            response = self.stub.UpdateUser(request=mss_pb2.UpdateUserRequest(**user))
+            return response
+        except grpc.RpcError as e:
+            print(f"gRPC error: {e.code()}, {e.details()}")
+            return None
+
+    def update_song(self, song: Dict[str, str]):
+        try:
+            response = self.stub.UpdateSong(request=mss_pb2.UpdateSongRequest(**song))
+            return response
+        except grpc.RpcError as e:
+            print(f"gRPC error: {e.code()}, {e.details()}")
+            return None
+
+    def update_playlist(self, playlist: Dict[str, Union[str, int, list]]):
+        try:
+            response = self.stub.UpdatePlaylist(
+                request=mss_pb2.UpdatePlaylistRequest(**playlist)
             )
             return response
         except grpc.RpcError as e:
             print(f"gRPC error: {e.code()}, {e.details()}")
             return None
 
-    def list_all_playlists_with_song(self, song_id):
+    def delete_user(self, user_id: int):
         try:
-            response = self.stub.ListAllPlaylistsWithSong(
-                request=mss_pb2.ListAllPlaylistsWithSongRequest(songId=song_id),
+            response = self.stub.DeleteUser(request=mss_pb2.IdRequest(id=user_id))
+            return response
+        except grpc.RpcError as e:
+            print(f"gRPC error: {e.code()}, {e.details()}")
+            return None
+
+    def delete_song(self, song_id: int):
+        try:
+            response = self.stub.DeleteSong(request=mss_pb2.IdRequest(id=song_id))
+            return response
+        except grpc.RpcError as e:
+            print(f"gRPC error: {e.code()}, {e.details()}")
+            return None
+
+    def delete_playlist(self, playlist_id: int):
+        try:
+            response = self.stub.DeletePlaylist(
+                request=mss_pb2.IdRequest(id=playlist_id)
             )
             return response
         except grpc.RpcError as e:
@@ -79,10 +135,6 @@ if __name__ == "__main__":
     def random_song_id():
         return r.randint(0, 99)
 
-    client = MusicStreamingClient()
-    print(client.list_all_users())
-    print(client.list_all_songs())
-    print(client.list_all_playlists_by_user(random_user_id()))
-    print(client.list_all_song_data_of_playlist(random_playlist_id()))
-    print(client.list_all_playlists_with_song(random_song_id()))
+    client = MusicStreamingGRPCClient()
+    print(client.get_users())
     client.close()

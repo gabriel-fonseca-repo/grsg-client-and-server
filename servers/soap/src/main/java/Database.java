@@ -1,10 +1,12 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.inject.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.InputStream;
 import java.util.List;
 
-@Singleton
+@ApplicationScoped
 public class Database {
 
   private final List<FygUser> fygUsers;
@@ -44,13 +46,126 @@ public class Database {
     return fygPlaylists;
   }
 
+  public Integer createUser(FygUser user) {
+    if (user == null) {
+      return -1;
+    }
+    if (user.getId() != null) {
+      return -1;
+    }
+    user.setId(getUsers().size());
+    getUsers().add(user);
+    return user.getId();
+  }
+
+  public Integer createSong(FygSong song) {
+    if (song == null) {
+      return -1;
+    }
+    if (song.getId() != null) {
+      return -1;
+    }
+    song.setId(getSongs().size());
+    getSongs().add(song);
+    return song.getId();
+  }
+
+  public Integer createPlaylist(FygPlaylist playlist) {
+    if (playlist == null) {
+      return -1;
+    }
+    if (playlist.getId() != null) {
+      return -1;
+    }
+    playlist.setId(getPlaylists().size());
+    getPlaylists().add(playlist);
+    return playlist.getId();
+  }
+
+  public Integer updateUser(FygUser user) {
+    if (user == null) {
+      return -1;
+    }
+    if (user.getId() == null) {
+      return -1;
+    }
+    if (user.getId() >= getUsers().size()) {
+      return -1;
+    }
+    getUsers().set(user.getId(), user);
+    return user.getId();
+  }
+
+  public Integer updateSong(FygSong song) {
+    if (song == null) {
+      return -1;
+    }
+    if (song.getId() == null) {
+      return -1;
+    }
+    if (song.getId() >= getSongs().size()) {
+      return -1;
+    }
+    getSongs().set(song.getId(), song);
+    return song.getId();
+  }
+
+  public Integer updatePlaylist(FygPlaylist playlist) {
+    if (playlist == null) {
+      return -1;
+    }
+    if (playlist.getId() == null) {
+      return -1;
+    }
+    if (playlist.getId() >= getPlaylists().size()) {
+      return -1;
+    }
+    getPlaylists().set(playlist.getId(), playlist);
+    return playlist.getId();
+  }
+
+  public Integer deleteUser(Integer id) {
+    if (id == null) {
+      return -1;
+    }
+    if (id >= getUsers().size()) {
+      return -1;
+    }
+    getUsers().remove(id.intValue());
+    return id;
+  }
+
+  public Integer deleteSong(Integer id) {
+    if (id == null) {
+      return -1;
+    }
+    if (id >= getSongs().size()) {
+      return -1;
+    }
+    getSongs().remove(id.intValue());
+    return id;
+  }
+
+  public Integer deletePlaylist(Integer id) {
+    if (id == null) {
+      return -1;
+    }
+    if (id >= getPlaylists().size()) {
+      return -1;
+    }
+    getPlaylists().remove(id.intValue());
+    return id;
+  }
+
 }
 
+@XmlRootElement
 class FygUser {
   private Integer id;
   private String name;
   private Integer age;
 
+  @XmlElement
   public Integer getId() {
     return id;
   }
@@ -59,6 +174,7 @@ class FygUser {
     this.id = id;
   }
 
+  @XmlElement
   public String getName() {
     return name;
   }
@@ -67,6 +183,7 @@ class FygUser {
     this.name = name;
   }
 
+  @XmlElement
   public Integer getAge() {
     return age;
   }
@@ -76,11 +193,13 @@ class FygUser {
   }
 }
 
+@XmlRootElement
 class FygSong {
   private Integer id;
   private String name;
   private String artist;
 
+  @XmlElement
   public Integer getId() {
     return id;
   }
@@ -89,6 +208,7 @@ class FygSong {
     this.id = id;
   }
 
+  @XmlElement
   public String getName() {
     return name;
   }
@@ -97,6 +217,7 @@ class FygSong {
     this.name = name;
   }
 
+  @XmlElement
   public String getArtist() {
     return artist;
   }
@@ -106,12 +227,14 @@ class FygSong {
   }
 }
 
+@XmlRootElement
 class FygPlaylist {
   private Integer id;
   private String name;
   private Integer userId;
   private List<Integer> songs;
 
+  @XmlElement
   public Integer getId() {
     return id;
   }
@@ -120,6 +243,7 @@ class FygPlaylist {
     this.id = id;
   }
 
+  @XmlElement
   public String getName() {
     return name;
   }
@@ -128,6 +252,7 @@ class FygPlaylist {
     this.name = name;
   }
 
+  @XmlElement
   public Integer getUserId() {
     return userId;
   }
@@ -136,6 +261,7 @@ class FygPlaylist {
     this.userId = userId;
   }
 
+  @XmlElement
   public List<Integer> getSongs() {
     return songs;
   }
