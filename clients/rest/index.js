@@ -70,6 +70,7 @@ async function makeRequest(endpoint, method = "GET", body = {}) {
     console.error(`Erro ao buscar os dados (${method} ${endpoint}):`, error);
   }
 }
+
 const actionsRandomData = {
   GetUsers: () => ({}),
   GetSongs: () => ({}),
